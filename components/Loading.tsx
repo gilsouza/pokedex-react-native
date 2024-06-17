@@ -4,11 +4,11 @@ export const Loading = () => {
   return (
     <LottieView
       autoPlay
+      source={require('../assets/animation/pokeball.json')}
       style={{
         width: 80,
         height: 80,
       }}
-      source={require('../assets/animation/pokeball.json')}
     />
   );
 };

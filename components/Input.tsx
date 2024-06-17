@@ -36,29 +36,29 @@ const Input = ({ label, placeholder, ...rest }: InputProps) => {
     <Box {...props}>
       {label && <Text variant="body">{label}</Text>}
       <Box
+        backgroundColor="white"
+        borderColor="lightGray"
+        borderRadius="borderRadii6"
         elevation={3}
         flexDirection="row"
         justifyContent="space-between"
-        borderColor="lightGray"
-        borderRadius="borderRadii6"
         padding="spacing12"
-        backgroundColor="white"
         style={Platform.select({
           ios: {
+            elevation: Platform.OS === 'android' ? 3 : 0,
             shadowColor: theme.colors.gray,
             shadowOffset: { width: 0, height: Platform.OS === 'ios' ? 1 : 0 },
             shadowOpacity: Platform.OS === 'ios' ? 0.4 : 0,
             shadowRadius: Platform.OS === 'ios' ? 2 : 0,
-            elevation: Platform.OS === 'android' ? 3 : 0,
           },
         })}>
         <TextInput
-          placeholderTextColor={theme.colors.gray}
           placeholder={placeholder}
+          placeholderTextColor={theme.colors.gray}
           style={{
-            fontSize: theme.textVariants.body.fontSize,
             color: theme.colors.black,
             flex: 1,
+            fontSize: theme.textVariants.body.fontSize,
             marginRight: theme.spacing.spacing8,
           }}
           {...rest}

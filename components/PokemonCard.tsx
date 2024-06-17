@@ -22,31 +22,31 @@ const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
 
   return (
     <Box
+      alignContent="center"
+      backgroundColor="white"
+      borderRadius="borderRadii12"
+      elevation={5}
       flex={1}
       flexGrow={1}
-      elevation={5}
-      borderRadius="borderRadii12"
+      justifyContent="center"
       margin="spacing4"
       padding="spacing24"
-      alignContent="center"
-      justifyContent="center"
-      backgroundColor="white"
       style={Platform.select({
         ios: {
+          elevation: Platform.OS === 'android' ? 5 : 0,
           shadowColor: theme.colors.gray,
           shadowOffset: { width: 0, height: Platform.OS === 'ios' ? 3 : 0 },
           shadowOpacity: Platform.OS === 'ios' ? 0.4 : 0,
           shadowRadius: Platform.OS === 'ios' ? 3 : 0,
-          elevation: Platform.OS === 'android' ? 5 : 0,
         },
       })}>
       <Box
+        alignContent="center"
+        backgroundColor={colorHex}
         borderRadius="borderRadii12"
+        justifyContent="center"
         paddingHorizontal="spacing8"
         paddingVertical="spacing4"
-        backgroundColor={colorHex}
-        alignContent="center"
-        justifyContent="center"
         style={{ position: 'absolute', top: 10, right: 10 }}>
         <Text variant="tag" textAlign="center" color="white">
           {pokemonNumber}
@@ -54,12 +54,12 @@ const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
       </Box>
 
       <Image
+        contentFit={contentFit}
+        placeholder="blurhash"
+        source={gePokemonImageUrl(pokemon.id)}
         style={{
           flex: 1,
         }}
-        source={gePokemonImageUrl(pokemon.id)}
-        placeholder="blurhash"
-        contentFit={contentFit}
         transition={1000}
       />
       <Text variant="body" textAlign="center" marginTop="spacing12">

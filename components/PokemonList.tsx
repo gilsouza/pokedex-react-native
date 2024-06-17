@@ -8,10 +8,10 @@ import { PokemonInfo } from '~/model/PokemonInfo';
 import { Box, Text } from '~/theme';
 
 interface PokemonListProps {
-  pokemons: PokemonInfo[];
-  isFetchingNextPage: boolean;
   isFetching: boolean;
+  isFetchingNextPage: boolean;
   loadMore: () => void;
+  pokemons: PokemonInfo[];
 }
 
 const PokemonList = ({ pokemons, isFetchingNextPage, isFetching, loadMore }: PokemonListProps) => {
@@ -35,17 +35,17 @@ const PokemonList = ({ pokemons, isFetchingNextPage, isFetching, loadMore }: Pok
 
   return (
     <FlatList
-      data={pokemons}
-      keyExtractor={(item) => item.id.toString()}
-      renderItem={renderItem}
-      onEndReached={loadMore}
-      onEndReachedThreshold={0.5}
-      ListFooterComponent={renderListFooter()}
-      ListEmptyComponent={renderListEmpty()}
       columnWrapperStyle={{
         padding: theme.spacing4,
         height: 180,
       }}
+      data={pokemons}
+      keyExtractor={(item) => item.id.toString()}
+      ListEmptyComponent={renderListEmpty()}
+      ListFooterComponent={renderListFooter()}
+      onEndReached={loadMore}
+      onEndReachedThreshold={0.5}
+      renderItem={renderItem}
       numColumns={2}
     />
   );

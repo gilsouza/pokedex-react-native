@@ -2,17 +2,15 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { forwardRef } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
-import { theme } from '~/theme';
-
-export const InputIcon = forwardRef<typeof Pressable, { onPress?: () => void }>(
+export const HeaderButton = forwardRef<typeof Pressable, { onPress?: () => void }>(
   ({ onPress }, ref) => {
     return (
       <Pressable onPress={onPress}>
         {({ pressed }) => (
           <FontAwesome
-            name="search"
+            name="info-circle"
             size={25}
-            color={theme.colors.lightGray}
+            color="gray"
             style={[
               styles.headerRight,
               {

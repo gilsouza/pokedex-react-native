@@ -49,7 +49,7 @@ const theme = createTheme({
   },
   textVariants: {
     tag: {
-      fontSize: 14,
+      fontSize: 12,
       fontWeight: '700',
     },
     body: {

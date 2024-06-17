@@ -11,7 +11,7 @@ import {
   useTheme,
 } from '@shopify/restyle';
 import React from 'react';
-import { TextInput } from 'react-native';
+import { Platform, TextInput } from 'react-native';
 
 import { Box, Text, Theme } from '~/theme';
 
@@ -36,14 +36,22 @@ const Input = ({ label, placeholder, ...rest }: InputProps) => {
     <Box {...props}>
       {label && <Text variant="body">{label}</Text>}
       <Box
-        borderWidth={1}
+        elevation={3}
         flexDirection="row"
         justifyContent="space-between"
-        elevation={3}
         borderColor="lightGray"
         borderRadius="borderRadii6"
         padding="spacing12"
-        backgroundColor="white">
+        backgroundColor="white"
+        style={Platform.select({
+          ios: {
+            shadowColor: theme.colors.gray,
+            shadowOffset: { width: 0, height: Platform.OS === 'ios' ? 1 : 0 },
+            shadowOpacity: Platform.OS === 'ios' ? 0.4 : 0,
+            shadowRadius: Platform.OS === 'ios' ? 2 : 0,
+            elevation: Platform.OS === 'android' ? 3 : 0,
+          },
+        })}>
         <TextInput
           placeholderTextColor={theme.colors.gray}
           placeholder={placeholder}

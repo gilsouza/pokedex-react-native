@@ -6,11 +6,11 @@ export const EditScreenInfo = ({ path }: { path: string }) => {
     'Change any of the text, save the file, and your app will automatically update.';
 
   return (
-    <Box alignItems="center" marginHorizontal="xl_64">
+    <Box alignItems="center" marginHorizontal="spacing64">
       <Text variant="body" lineHeight={24} textAlign="center">
         {title}
       </Text>
-      <Box borderRadius="s_3" paddingHorizontal="xs_4" marginVertical="s_8">
+      <Box borderRadius="borderRadii3" paddingHorizontal="spacing4" marginVertical="spacing8">
         <Text>{path}</Text>
       </Box>
       <Text variant="body" lineHeight={24} textAlign="center">

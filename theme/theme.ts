@@ -1,41 +1,60 @@
 import { createTheme, useTheme as useRestyleTheme } from '@shopify/restyle';
 import { ImageStyle, TextStyle, ViewStyle } from 'react-native';
 
+import { typeColors } from './typeColors';
+
 type NamedStyles<T> = {
   [P in keyof T]: ViewStyle | TextStyle | ImageStyle;
 };
 
 const palette = {
+  lightGray: '#EEEEEE',
   gray: '#808080',
   blue: '#007AFF',
   darkGray: '#38434D',
   white: '#FFFFFF',
   black: '#000000',
   purple: '#6366F1',
+  red: '#C82935',
 };
 
 const theme = createTheme({
   colors: {
-    ...palette,
+    ...palette, // FIXME: remove later
+
+    mainBackground: palette.lightGray,
+    mainForeground: palette.black,
+
+    primaryCardBackground: palette.purple,
+    secondaryCardBackground: palette.white,
+    primaryCardText: palette.white,
+    secondaryCardText: palette.black,
+
+    ...typeColors,
   },
   spacing: {
-    xs_4: 4,
-    s_8: 8,
-    sm_12: 12,
-    m_16: 16,
-    ml_24: 24,
-    l_32: 32,
-    xl_64: 64,
+    spacing4: 4,
+    spacing8: 8,
+    spacing12: 12,
+    spacing16: 16,
+    spacing24: 24,
+    spacing32: 32,
+    spacing64: 64,
   },
   borderRadii: {
-    s_3: 3,
-    m_6: 6,
-    l_12: 12,
-    xl_24: 24,
+    borderRadii3: 3,
+    borderRadii6: 6,
+    borderRadii12: 12,
+    borderRadii24: 24,
   },
   textVariants: {
+    tag: {
+      fontSize: 14,
+      fontWeight: '700',
+    },
     body: {
-      fontSize: 16,
+      fontSize: 18,
+      fontWeight: 'bold',
     },
     title: { fontSize: 20, fontWeight: 'bold' },
     large: {
@@ -46,7 +65,12 @@ const theme = createTheme({
       fontWeight: 'bold',
     },
     defaults: {
-      // We can define a default text variant here.
+      fontSize: 16,
+    },
+  },
+  inputVariants: {
+    defaults: {
+      padding: 10,
     },
   },
 });

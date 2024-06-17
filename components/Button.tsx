@@ -18,11 +18,11 @@ const useStyles = makeStyles((theme) => ({
   button: {
     alignItems: 'center',
     backgroundColor: theme.colors.purple,
-    borderRadius: theme.borderRadii.xl_24,
+    borderRadius: theme.borderRadii.borderRadii24,
     elevation: 5,
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: theme.spacing.m_16,
+    padding: theme.spacing.spacing16,
     shadowColor: theme.colors.black,
     shadowOffset: {
       height: 2,

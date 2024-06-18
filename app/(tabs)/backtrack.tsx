@@ -2,7 +2,7 @@ import { Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
 import { PokemonList } from '~/components/PokemonList';
-import { usePokemonStore } from '~/store/pokemon';
+import { usePokemonStore } from '~/store/usePokemonStore';
 
 export default function BackTrack() {
   const pokemons = usePokemonStore((store) => store.captured);

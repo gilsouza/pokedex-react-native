@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { PokemonListInfo } from '~/model/PokemonInfo';
-import { usePokemonStore } from '~/store/pokemon';
+import { usePokemonStore } from '~/store/usePokemonStore';
 
 export const useCapturePokemon = () => {
   const captured = usePokemonStore((state) => state.captured);

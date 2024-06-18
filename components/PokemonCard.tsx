@@ -15,7 +15,7 @@ const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
 
   const firstTypeName = pokemon.types?.at(0)?.name;
   const colorHex = (`${firstTypeName}Dark` as keyof typeof theme.colors) || theme.colors.steelLight;
-  const pokemonNumber = `#${pokemon.order.toString().padStart(3, '0')}`;
+  const pokemonNumber = `#${pokemon.id.toString().padStart(3, '0')}`;
 
   const gePokemonImageUrl = (id: number) =>
     `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`;

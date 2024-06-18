@@ -34,7 +34,7 @@ const Input = ({ label, placeholder, ...rest }: InputProps) => {
 
   return (
     <Box {...props}>
-      {label && <Text variant="body">{label}</Text>}
+      {label && <Text variant="input">{label}</Text>}
       <Box
         backgroundColor="white"
         borderColor="lightGray"
@@ -58,7 +58,7 @@ const Input = ({ label, placeholder, ...rest }: InputProps) => {
           style={{
             color: theme.colors.black,
             flex: 1,
-            fontSize: theme.textVariants.body.fontSize,
+            fontSize: theme.textVariants.input.fontSize,
             marginRight: theme.spacing.spacing8,
           }}
           {...rest}

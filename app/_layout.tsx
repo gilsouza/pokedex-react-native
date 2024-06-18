@@ -20,7 +20,6 @@ export default function RootLayout() {
         persistOptions={{ persister: asyncStoragePersister }}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
       </PersistQueryClientProvider>
     </ThemeProvider>

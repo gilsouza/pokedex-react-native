@@ -1,44 +1,41 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+
+import { Box, Color, Text } from '~/theme';
+import { capitalize } from '~/utils/strings';
 
 interface StatBarProps {
+  label?: string;
   max: number;
   actual: number;
+  colorFg?: Color;
+  colorBg?: Color;
 }
 
-export const StatBar = ({ max, actual }: StatBarProps) => {
+export const StatBar = ({
+  label,
+  max,
+  actual,
+  colorBg = 'darkGray',
+  colorFg = 'lightGray',
+}: StatBarProps) => {
   const progress = (actual / max) * 100;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{`HP: ${actual}/${max}`}</Text>
-      <View style={styles.progressContainer}>
-        <View style={[styles.progressBar, { width: `${progress}%` }]} />
-      </View>
-    </View>
+    <>
+      {!!label && (
+        <Text
+          variant="stat"
+          marginBottom="spacing4">{`${capitalize(label)}: ${actual}/${max}`}</Text>
+      )}
+      <Box
+        width="100%"
+        height={10}
+        backgroundColor={colorBg}
+        borderRadius="borderRadii6"
+        marginBottom="spacing4"
+        overflow="hidden">
+        <Box height="100%" width={`${progress}%`} backgroundColor={colorFg} />
+      </Box>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 20,
-    alignItems: 'center',
-  },
-  label: {
-    marginBottom: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  progressContainer: {
-    width: '100%',
-    height: 30,
-    backgroundColor: '#e0e0e0',
-    borderRadius: 15,
-    overflow: 'hidden',
-  },
-  progressBar: {
-    height: '100%',
-    backgroundColor: '#76c7c0',
-    borderRadius: 15,
-  },
-});

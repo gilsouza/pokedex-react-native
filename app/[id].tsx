@@ -121,8 +121,13 @@ export default function PokemonDetail() {
                 {`Peso: ${convertHectogramsToKilograms(weight)}`}
               </Text>
             </Box>
+
             {stats.map((stat) => (
-              <StatBar {...convertStatToStatInfo(stat)} />
+              <StatBar
+                label={stat.name}
+                {...convertStatToStatInfo(stat)}
+                colorFg={`${firstTypeName}Light` as Color}
+              />
             ))}
           </Box>
         </Box>

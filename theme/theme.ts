@@ -10,26 +10,15 @@ type NamedStyles<T> = {
 const palette = {
   lightGray: '#EEEEEE',
   gray: '#808080',
-  blue: '#007AFF',
   darkGray: '#38434D',
   white: '#FFFFFF',
   black: '#000000',
-  purple: '#6366F1',
   red: '#C82935',
 };
 
 const theme = createTheme({
   colors: {
-    ...palette, // FIXME: remove later
-
-    mainBackground: palette.lightGray,
-    mainForeground: palette.black,
-
-    primaryCardBackground: palette.purple,
-    secondaryCardBackground: palette.white,
-    primaryCardText: palette.white,
-    secondaryCardText: palette.black,
-
+    ...palette,
     ...typeColors,
   },
   spacing: {
@@ -46,23 +35,27 @@ const theme = createTheme({
     borderRadii6: 6,
     borderRadii12: 12,
     borderRadii24: 24,
-    borderRadii1000: 300,
   },
   textVariants: {
+    stat: {
+      fontSize: 16,
+      fontWeight: '500',
+    },
     tag: {
-      fontSize: 12,
+      fontSize: 14,
       fontWeight: '700',
     },
     body: {
       fontSize: 18,
       fontWeight: 'bold',
     },
+    input: {
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
     title: { fontSize: 20, fontWeight: 'bold' },
     large: {
       fontSize: 36,
-    },
-    extra_large: {
-      fontSize: 64,
       fontWeight: 'bold',
     },
     defaults: {

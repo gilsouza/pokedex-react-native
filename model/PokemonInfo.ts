@@ -55,6 +55,17 @@ export interface SpeciesDetailsResponse {
   egg_groups: EggGroup[];
 }
 
+export interface PokemonListResponse {
+  name: string;
+  url: string;
+}
+
+export interface PokemonListInfo {
+  name: string;
+  imageUrl: string;
+  id: number;
+}
+
 export interface PokemonInfo {
   id: number;
   order: number;
@@ -65,6 +76,7 @@ export interface PokemonInfo {
   stats: Stat[];
   color: Color;
   eggGroup: EggGroup[];
+  imageUrl: string;
 }
 
 export interface PokemonModel {

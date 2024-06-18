@@ -1,24 +1,15 @@
-import { useMemo } from 'react';
 import debounce from 'lodash.debounce';
 
 import { Input } from '~/components/Input';
 import { PokemonList } from '~/components/PokemonList';
-import { usePokemons } from '~/service/api';
 import { useFindPokemon } from '~/hooks/useFindPokemon';
+import { usePokemons } from '~/service/api';
 
 export default function Home() {
   const { findPokemon } = useFindPokemon();
-  const { data, isFetching, hasNextPage, fetchNextPage, isFetchingNextPage } = usePokemons();
+  const { data: pokemons, isFetching } = usePokemons();
 
-  const pokemons = useMemo(() => {
-    return data ? data.pages.flatMap((page) => page.results) : [];
-  }, [data]);
-
-  const loadMore = () => {
-    if (hasNextPage) {
-      fetchNextPage();
-    }
-  };
+  console.log('pokemons', pokemons);
 
   const onChange = debounce(
     (value: string) => {
@@ -41,12 +32,7 @@ export default function Home() {
         marginBottom="spacing4"
         onChangeText={onChange}
       />
-      <PokemonList
-        isFetching={isFetching}
-        isFetchingNextPage={isFetchingNextPage}
-        loadMore={loadMore}
-        pokemons={pokemons}
-      />
+      <PokemonList isFetching={isFetching} pokemons={pokemons || []} />
     </>
   );
 }

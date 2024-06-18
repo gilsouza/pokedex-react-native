@@ -1,24 +1,27 @@
 import { useTheme } from '@shopify/restyle';
+import { Link } from 'expo-router';
 import { ActivityIndicator, FlatList, Pressable } from 'react-native';
 
 import { Loading } from './Loading';
 import { PokemonCard } from './PokemonCard';
 
-import { PokemonInfo } from '~/model/PokemonInfo';
+import { PokemonListInfo } from '~/model/PokemonInfo';
 import { Box, Text } from '~/theme';
-import { Link } from 'expo-router';
 
 interface PokemonListProps {
   isFetching: boolean;
-  isFetchingNextPage: boolean;
-  loadMore: () => void;
-  pokemons: PokemonInfo[];
+  pagination?: {
+    isFetchingNextPage: boolean;
+    loadMore: () => void;
+  };
+  pokemons: PokemonListInfo[];
 }
 
-const PokemonList = ({ pokemons, isFetchingNextPage, isFetching, loadMore }: PokemonListProps) => {
+const PokemonList = ({ pokemons, pagination, isFetching }: PokemonListProps) => {
   const theme = useTheme();
+  const { isFetchingNextPage, loadMore } = pagination || {};
 
-  const renderItem = ({ item }: { item: PokemonInfo }) => {
+  const renderItem = ({ item }: { item: PokemonListInfo }) => {
     return (
       <Link
         href={{

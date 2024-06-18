@@ -2,23 +2,23 @@ import { useTheme } from '@shopify/restyle';
 import { Image, ImageContentFit } from 'expo-image';
 import { Platform } from 'react-native';
 
-import { PokemonInfo } from '~/model/PokemonInfo';
+import { PokemonListInfo } from '~/model/PokemonInfo';
 import { Box, Text } from '~/theme';
+import { toPokemonNumber } from '~/utils/pokemon';
 
 interface PokemonCardProps {
-  pokemon: PokemonInfo;
+  pokemon: PokemonListInfo;
   contentFit: ImageContentFit;
 }
 
 const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
   const theme = useTheme();
 
-  const firstTypeName = pokemon.types?.at(0)?.name;
-  const colorHex = (`${firstTypeName}Dark` as keyof typeof theme.colors) || theme.colors.steelLight;
-  const pokemonNumber = `#${pokemon.id.toString().padStart(3, '0')}`;
+  console.log('pokemon.imageUrl', pokemon.imageUrl);
 
-  const gePokemonImageUrl = (id: number) =>
-    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`;
+  // const firstTypeName = pokemon.types?.at(0)?.name;
+  // const colorHex = (`${firstTypeName}Dark` as keyof typeof theme.colors) || theme.colors.steelLight;
+  const pokemonNumber = toPokemonNumber(pokemon.id);
 
   return (
     <Box
@@ -42,7 +42,7 @@ const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
       })}>
       <Box
         alignContent="center"
-        backgroundColor={colorHex}
+        // backgroundColor={colorHex}
         borderRadius="borderRadii12"
         justifyContent="center"
         paddingHorizontal="spacing8"
@@ -56,7 +56,7 @@ const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
       <Image
         contentFit={contentFit}
         placeholder="blurhash"
-        source={gePokemonImageUrl(pokemon.id)}
+        source={pokemon.imageUrl}
         style={{
           flex: 1,
         }}
@@ -69,5 +69,5 @@ const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
   );
 };
 
-export type { PokemonCardProps };
 export { PokemonCard };
+export type { PokemonCardProps };

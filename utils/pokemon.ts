@@ -26,3 +26,14 @@ export const convertHectogramsToKilograms = (hectograms: number): string =>
   `${parseFloat((hectograms / 10).toFixed(1))} kg`;
 
 export const toPokemonNumber = (order: number): string => `#${order.toString().padStart(3, '0')}`;
+
+export const getIdFromUrlDetails = (url: string): number => {
+  const urlObj = new URL(url);
+  const pathname = urlObj.pathname;
+  const segments = pathname.split('/').filter((segment) => segment !== '');
+
+  return Number(segments[segments.length - 1]);
+};
+
+export const getImageUrlById = (pokemonId: number): string =>
+  `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemonId}.gif`;

@@ -7,11 +7,11 @@ export default function NotFoundScreen() {
   return (
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
-      <Box flex={1} justifyContent="center" alignItems="center" padding="ml_24">
-        <Text variant="title">This screen doesn't exist.</Text>
+      <Box flex={1} justifyContent="center" alignItems="center" padding="spacing24">
+        <Text variant="title">Esta tela não existe!</Text>
         <Link href="/" style={styles.link}>
-          <Text variant="body" color="blue">
-            Go to home screen!
+          <Text variant="body" color="gray">
+            Voltar para home!
           </Text>
         </Link>
       </Box>
@@ -21,7 +21,7 @@ export default function NotFoundScreen() {
 
 const useStyles = makeStyles((theme) => ({
   link: {
-    marginTop: theme.spacing.m_16,
-    paddingVertical: theme.spacing.m_16,
+    marginTop: theme.spacing.spacing16,
+    paddingVertical: theme.spacing.spacing16,
   },
 }));

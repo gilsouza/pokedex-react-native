@@ -3,7 +3,6 @@ import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persi
 import { QueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
-// FIXME: tipar env
 const BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL;
 
 export const httpClient = axios.create({

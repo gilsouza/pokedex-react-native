@@ -15,6 +15,7 @@ import {
   convertDecimetersToMeters,
   convertHectogramsToKilograms,
   convertStatToStatInfo,
+  getImageUrlById,
   toPokemonNumber,
 } from '~/utils/pokemon';
 import { capitalize } from '~/utils/strings';
@@ -69,7 +70,7 @@ export default function PokemonDetail() {
               <Image
                 contentFit="contain"
                 placeholder="blurhash"
-                source={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${pokemon.id}.gif`}
+                source={getImageUrlById(pokemon.id)}
                 style={{
                   marginTop: 40,
                   height: 200,

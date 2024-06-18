@@ -3,14 +3,13 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { httpClient } from './clientConfig';
 
 import { Page } from '~/model/PageResponse';
+import { PokemonInfo, PokemonListInfo } from '~/model/PokemonInfo';
 import {
   PokemonDetailsResponse,
-  PokemonInfo,
-  PokemonListInfo,
   PokemonListResponse,
   PokemonResponse,
   SpeciesDetailsResponse,
-} from '~/model/PokemonInfo';
+} from '~/model/PokemonResponse';
 import { getIdFromUrlDetails, getImageUrlById } from '~/utils/pokemon';
 
 type NameOrIdParam = string | number;

@@ -13,7 +13,6 @@ interface PokemonCardProps {
 
 const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
   const theme = useTheme();
-  console.log(pokemon);
 
   const pokemonNumber = toPokemonNumber(pokemon.id);
 

@@ -1,11 +1,12 @@
 import { useTheme } from '@shopify/restyle';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, FlatList, Pressable } from 'react-native';
 
 import { Loading } from './Loading';
 import { PokemonCard } from './PokemonCard';
 
 import { PokemonInfo } from '~/model/PokemonInfo';
 import { Box, Text } from '~/theme';
+import { Link } from 'expo-router';
 
 interface PokemonListProps {
   isFetching: boolean;
@@ -17,9 +18,22 @@ interface PokemonListProps {
 const PokemonList = ({ pokemons, isFetchingNextPage, isFetching, loadMore }: PokemonListProps) => {
   const theme = useTheme();
 
-  const renderItem = ({ item }: { item: PokemonInfo }) => (
-    <PokemonCard pokemon={item} contentFit="contain" />
-  );
+  const renderItem = ({ item }: { item: PokemonInfo }) => {
+    return (
+      <Link
+        href={{
+          pathname: '[id]',
+          params: {
+            id: item.id,
+          },
+        }}
+        asChild>
+        <Pressable style={{ flex: 1 }}>
+          <PokemonCard pokemon={item} contentFit="contain" />
+        </Pressable>
+      </Link>
+    );
+  };
 
   const renderListFooter = () => {
     return isFetchingNextPage ? <ActivityIndicator size="large" color={theme.colors.red} /> : null;
@@ -28,7 +42,7 @@ const PokemonList = ({ pokemons, isFetchingNextPage, isFetching, loadMore }: Pok
   const renderListEmpty = () => {
     return (
       <Box flex={1} alignItems="center" justifyContent="center" paddingTop="spacing64">
-        {isFetching ? <Loading /> : <Text>No data available</Text>}
+        {isFetching ? <Loading /> : <Text>Nenhum pokemon por aqui...</Text>}
       </Box>
     );
   };

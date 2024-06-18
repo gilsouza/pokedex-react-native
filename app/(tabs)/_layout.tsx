@@ -21,9 +21,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="backtrack"
         options={{
-          title: 'Tab Two',
+          title: 'Tab Tree',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

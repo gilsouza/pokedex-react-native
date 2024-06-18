@@ -57,25 +57,28 @@ export const usePokemons = () => {
 };
 
 const fetchPokemonByNameOrId = async (nameOrId: NameOrIdParam) => {
-  const { data } = await httpClient.get(`/pokemon/${nameOrId}`);
-  return data;
+  const { data } = await httpClient.get<PokemonDetailsResponse>(`/pokemon/${nameOrId}`);
+
+  const specieInfo = await fetchSpecies(data.species.url);
+
+  const pokemonDetails: PokemonInfo = {
+    color: specieInfo.color,
+    eggGroup: specieInfo.egg_groups,
+    height: data.height,
+    id: data.id,
+    order: data.order,
+    name: data.name,
+    stats: data.stats.map((stat) => stat.stat),
+    types: data.types.map((type) => type.type),
+    weight: data.weight,
+  };
+
+  return pokemonDetails;
 };
 
 export const usePokemonByNameOrId = (nameOrId: NameOrIdParam) => {
-  return useQuery({
+  return useQuery<PokemonInfo>({
     queryKey: ['pokemon', nameOrId],
     queryFn: () => fetchPokemonByNameOrId(nameOrId),
   });
 };
-
-// const fetchEggGroupByNameOrId = async (nameOrId: NameOrIdParam) => {
-//   const { data } = await httpClient.get(`/egg-group/${nameOrId}`);
-//   return data;
-// };
-
-// export const useEggGroupByNameOrId = (nameOrId: NameOrIdParam) => {
-//   return useQuery({
-//     queryKey: ['eggGroup', nameOrId],
-//     queryFn: () => fetchEggGroupByNameOrId(nameOrId),
-//   });
-// };

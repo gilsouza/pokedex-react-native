@@ -1,13 +1,12 @@
 import { useReactQueryDevTools } from '@dev-plugins/react-query';
 import { ThemeProvider } from '@shopify/restyle';
-import { QueryClientProvider } from '@tanstack/react-query';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { Stack } from 'expo-router';
 import { theme } from 'theme';
 
-import { queryClient } from '~/service/clientConfig';
+import { asyncStoragePersister, queryClient } from '~/service/clientConfig';
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: '(tabs)',
 };
 
@@ -16,12 +15,14 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
+      <PersistQueryClientProvider
+        client={queryClient}
+        persistOptions={{ persister: asyncStoragePersister }}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
-      </QueryClientProvider>
+      </PersistQueryClientProvider>
     </ThemeProvider>
   );
 }

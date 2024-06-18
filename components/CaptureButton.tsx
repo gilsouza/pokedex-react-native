@@ -5,22 +5,25 @@ import { Pressable, StyleSheet } from 'react-native';
 import Toast from 'react-native-root-toast';
 
 import { useCapturePokemon } from '~/hooks/useCapturePokemon';
+import { PokemonListInfo } from '~/model/PokemonInfo';
 
-export const CaptureButton = forwardRef<typeof Pressable, { pokemonId: number }>(
-  ({ pokemonId }, ref) => {
+export const CaptureButton = forwardRef<typeof Pressable, { pokemon?: PokemonListInfo }>(
+  ({ pokemon }, ref) => {
     const theme = useTheme();
     const { capture, hasCaptured, release } = useCapturePokemon();
 
-    const captured = hasCaptured(pokemonId);
+    if (!pokemon) return null;
+
+    const captured = hasCaptured(pokemon?.id);
 
     const onPress = () => {
       if (captured) {
-        release(pokemonId);
+        release(pokemon.id);
         Toast.show('Pokemon libertado com sucesso', {
           duration: Toast.durations.SHORT,
         });
       } else {
-        capture(pokemonId);
+        capture(pokemon);
         Toast.show('Pokemon capturado com sucesso', {
           duration: Toast.durations.SHORT,
         });

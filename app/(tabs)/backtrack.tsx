@@ -1,8 +1,11 @@
 import { Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
+
 import { PokemonList } from '~/components/PokemonList';
+import { usePokemonStore } from '~/store/pokemon';
 
 export default function BackTrack() {
+  const pokemons = usePokemonStore((store) => store.captured);
   return (
     <>
       <Stack.Screen options={{ title: 'Meus Pokemons' }} />
@@ -12,10 +15,3 @@ export default function BackTrack() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-});

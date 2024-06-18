@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+import { PokemonListInfo } from '~/model/PokemonInfo';
 import { usePokemonStore } from '~/store/pokemon';
 
 export const useCapturePokemon = () => {
@@ -7,8 +8,8 @@ export const useCapturePokemon = () => {
   const _capture = usePokemonStore((state) => state.capture);
   const _release = usePokemonStore((state) => state.release);
 
-  const capture = useCallback((pokemonId: number) => {
-    _capture(pokemonId);
+  const capture = useCallback((pokemon: PokemonListInfo) => {
+    _capture(pokemon);
   }, []);
 
   const release = useCallback((pokemonId: number) => {
@@ -16,7 +17,7 @@ export const useCapturePokemon = () => {
   }, []);
 
   const hasCaptured = useCallback(
-    (pokemonId: number) => captured.some((id) => id === pokemonId),
+    (pokemonId: number) => captured.some((pokemon) => pokemon.id === pokemonId),
     [captured]
   );
 

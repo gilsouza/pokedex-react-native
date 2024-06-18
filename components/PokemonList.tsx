@@ -57,7 +57,7 @@ const PokemonList = ({ pokemons, pagination, isFetching }: PokemonListProps) => 
         height: 180,
       }}
       data={pokemons}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={(item) => `${item.id}`}
       ListEmptyComponent={renderListEmpty()}
       ListFooterComponent={renderListFooter()}
       onEndReached={loadMore}

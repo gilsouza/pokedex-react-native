@@ -105,6 +105,7 @@ const fetchPokemonByNameOrId = async (nameOrId: NameOrIdParam) => {
     })),
     types: data.types.map((type) => type.type),
     weight: data.weight,
+    imageUrl: getImageUrlById(data.id),
   };
 
   return pokemonDetails;

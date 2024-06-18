@@ -3,16 +3,13 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { ScrollView } from 'react-native';
-import Toast from 'react-native-root-toast';
 
 import { CaptureButton } from '~/components/CaptureButton';
 import { Loading } from '~/components/Loading';
 import { StatBar } from '~/components/StatBar';
 import { TypeTag } from '~/components/TypeTag';
-import { useCapturePokemon } from '~/hooks/useCapturePokemon';
 import { PokemonInfo } from '~/model/PokemonInfo';
 import { usePokemonByNameOrId } from '~/service/api';
-import { usePokemonStore } from '~/store/pokemon';
 import { Box, Color, Text } from '~/theme';
 import {
   convertDecimetersToMeters,
@@ -48,7 +45,7 @@ export default function PokemonDetail() {
           title: '',
           headerTransparent: true,
           headerTintColor: theme.colors.white,
-          headerRight: () => <CaptureButton pokemonId={Number(id)} />,
+          headerRight: () => <CaptureButton pokemon={pokemon} />,
         }}
       />
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>

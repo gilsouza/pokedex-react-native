@@ -15,11 +15,15 @@ export const usePokemonStore = create<PokemonState>()(
     (set) => ({
       captured: [],
       capture: (pokemon: PokemonListInfo) =>
-        set((state) => ({
-          captured: state.captured.some((p) => p.id === pokemon.id)
+        set((state) => {
+          const newCaptured = state.captured.some((p) => p.id === pokemon.id)
             ? state.captured
-            : [...state.captured, pokemon],
-        })),
+            : [...state.captured, pokemon];
+
+          return {
+            captured: newCaptured.sort((a, b) => a.id - b.id),
+          };
+        }),
       release: (id: number) =>
         set((state) => ({
           captured: state.captured.filter((p) => p.id !== id),

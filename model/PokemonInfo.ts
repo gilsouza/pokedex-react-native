@@ -4,6 +4,7 @@ export interface Type {
 
 export interface Stat {
   name: string;
+  value: number;
 }
 
 export interface Color {
@@ -19,8 +20,12 @@ export interface TypeResponse {
   type: Type;
 }
 
+export interface StatResponse {
+  name: string;
+}
+
 export interface StatsResponse {
-  stat: Stat;
+  stat: StatResponse;
   base_stat: number;
 }
 
@@ -73,12 +78,3 @@ export interface PokemonModel {
   eggGroup: EggGroup[];
   isFavorite: boolean;
 }
-
-// companion object {
-//   const val maxHp = 255
-//   const val maxAttack = 190
-//   const val maxDefense = 230
-//   const val maxSpAttack = 200
-//   const val maxSpDefense = 230
-//   const val maxSpeed = 180
-// }

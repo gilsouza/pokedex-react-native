@@ -68,7 +68,10 @@ const fetchPokemonByNameOrId = async (nameOrId: NameOrIdParam) => {
     id: data.id,
     order: data.order,
     name: data.name,
-    stats: data.stats.map((stat) => stat.stat),
+    stats: data.stats.map((stat) => ({
+      name: stat.stat.name,
+      value: stat.base_stat,
+    })),
     types: data.types.map((type) => type.type),
     weight: data.weight,
   };

@@ -89,4 +89,5 @@ export const makeStyles = <T extends NamedStyles<T> | NamedStyles<unknown>>(
 };
 
 export type Theme = typeof theme;
+export type Color = keyof typeof theme.colors;
 export default theme;

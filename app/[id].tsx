@@ -1,35 +1,41 @@
 import { useTheme } from '@shopify/restyle';
-import { Stack, useLocalSearchParams } from 'expo-router';
-import { StyleSheet } from 'react-native';
-import { Loading } from '~/components/Loading';
-import { LinearGradient } from 'expo-linear-gradient';
-
-import { usePokemonByNameOrId } from '~/service/api';
-import { Box, Text } from '~/theme';
 import { Image } from 'expo-image';
-import { capitalize } from '~/utils/strings';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Stack, useLocalSearchParams } from 'expo-router';
+import { Platform, StyleSheet } from 'react-native';
+
+import { Loading } from '~/components/Loading';
+import { StatBar } from '~/components/StatBar';
+import { TypeTag } from '~/components/TypeTag';
 import { PokemonInfo } from '~/model/PokemonInfo';
-import { convertDecimetersToMeters, convertHectogramsToKilograms } from '~/utils/pokemon';
+import { usePokemonByNameOrId } from '~/service/api';
+import { Box, Color, Text } from '~/theme';
+import {
+  convertDecimetersToMeters,
+  convertHectogramsToKilograms,
+  convertStatToStatInfo,
+  toPokemonNumber,
+} from '~/utils/pokemon';
+import { capitalize } from '~/utils/strings';
 
 export default function PokemonDetail() {
   const theme = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
-
   const { data: pokemon, isFetching, isLoading } = usePokemonByNameOrId(id as string);
 
-  const { name, types, weight, height, color, eggGroup, order, stats } = pokemon as PokemonInfo;
+  const { name, types, weight, height, color, eggGroup, order, stats } = (pokemon ||
+    {}) as PokemonInfo;
 
-  console.log('name', name);
-  console.log('types', types);
-  console.log('id', id);
-  console.log('order', order);
-  console.log('weight', weight);
-  console.log('height', height);
-  console.log('color', color);
-  console.log('eggGroup', eggGroup);
-  console.log('stats', stats);
+  // console.log('name', name);
+  // console.log('types', types);
+  // console.log('id', id);
+  // console.log('order', order);
+  // console.log('weight', weight);
+  // console.log('height', height);
+  // console.log('color', color);
+  // console.log('eggGroup', eggGroup);
+  // console.log('stats', stats);
 
-  const firstTypeName = types?.at(0)?.name;
   // const colorLight =
   //   (`${firstTypeName}Light` as keyof typeof theme.colors) || theme.colors.steelLight;
   // const colorDark =
@@ -38,8 +44,11 @@ export default function PokemonDetail() {
   // console.log('colorLight', colorLight);
   // console.log('colorDark', colorDark);
 
-  const dark = theme.colors[`${firstTypeName}Dark` as keyof typeof theme.colors];
-  const light = theme.colors[`${firstTypeName}Light` as keyof typeof theme.colors];
+  const firstTypeName = types?.at(0)?.name;
+  // const darkColorHex =
+  //   (`${firstTypeName}Dark` as keyof typeof theme.colors) || theme.colors.steelLight;
+  const darkColor = theme.colors[`${firstTypeName}Dark` as keyof typeof theme.colors];
+  const lightColor = theme.colors[`${firstTypeName}Light` as keyof typeof theme.colors];
 
   const renderLoading = () => {
     return (
@@ -54,7 +63,7 @@ export default function PokemonDetail() {
       <Box flex={1}>
         <Box height={400} marginTop="spacing64">
           <LinearGradient
-            colors={[dark, light]}
+            colors={[darkColor, lightColor]}
             start={[0, 0]}
             end={[1, 1]}
             style={{
@@ -77,24 +86,44 @@ export default function PokemonDetail() {
             transition={100}
           />
           <Box flex={1} padding="spacing16">
-            <Text variant="large" textAlign="left">
-              {capitalize(name)}
+            <Box marginBottom="spacing24">
+              <Text variant="large" textAlign="left">
+                {capitalize(name)}
+              </Text>
+              <Text variant="body" textAlign="left">
+                {toPokemonNumber(order)}
+              </Text>
+            </Box>
+
+            <Text variant="body" textAlign="left" marginBottom="spacing8">
+              Tipo
             </Text>
-            <Text variant="body" textAlign="left">
-              {`#${order?.toString().padStart(3, '0')}`}
+            <Box marginBottom="spacing12" flexDirection="row">
+              {types.map((type) => (
+                <TypeTag text={type.name} color={`${type.name}Dark` as Color} />
+              ))}
+            </Box>
+
+            <Text variant="body" textAlign="left" marginBottom="spacing8">
+              Espécie
             </Text>
-            <Text variant="body" textAlign="left">
-              {`Altura: ${convertDecimetersToMeters(height)}`}
-            </Text>
-            <Text variant="body" textAlign="left">
-              {`Peso: ${convertHectogramsToKilograms(weight)}`}
-            </Text>
-            <Text variant="body" textAlign="left">
-              {`Tipos: ${types.map((type) => type.name)}`}
-            </Text>
-            <Text variant="body" textAlign="left">
-              {`Status: ${stats.map((stat) => stat.name)}`}
-            </Text>
+            <Box marginBottom="spacing24" flexDirection="row">
+              {eggGroup.map((eg) => (
+                <TypeTag text={eg.name} color={`${eg.name}Dark` as Color} />
+              ))}
+            </Box>
+
+            <Box marginBottom="spacing24">
+              <Text variant="body" textAlign="left">
+                {`Altura: ${convertDecimetersToMeters(height)}`}
+              </Text>
+              <Text variant="body" textAlign="left">
+                {`Peso: ${convertHectogramsToKilograms(weight)}`}
+              </Text>
+            </Box>
+            {stats.map((stat) => (
+              <StatBar {...convertStatToStatInfo(stat)} />
+            ))}
           </Box>
         </Box>
       </Box>
@@ -106,16 +135,8 @@ export default function PokemonDetail() {
       <Stack.Screen
         options={{ title: '', headerTransparent: true, headerTintColor: theme.colors.white }}
       />
-
       {(isFetching || isLoading) && renderLoading()}
       {pokemon && renderDetail()}
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-});

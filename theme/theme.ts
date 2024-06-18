@@ -46,6 +46,7 @@ const theme = createTheme({
     borderRadii6: 6,
     borderRadii12: 12,
     borderRadii24: 24,
+    borderRadii1000: 300,
   },
   textVariants: {
     tag: {

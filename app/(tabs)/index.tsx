@@ -1,26 +1,29 @@
 import debounce from 'lodash.debounce';
+import { useState } from 'react';
 
 import { Input } from '~/components/Input';
 import { PokemonList } from '~/components/PokemonList';
 import { useFindPokemon } from '~/hooks/useFindPokemon';
+import { PokemonListInfo } from '~/model/PokemonInfo';
 import { usePokemons } from '~/service/api';
 
 export default function Home() {
-  const { findPokemon } = useFindPokemon();
+  const [searchResult, setSearchResult] = useState<PokemonListInfo[]>([]);
   const { data: pokemons, isFetching } = usePokemons();
-
-  console.log('pokemons', pokemons);
+  const { findPokemonById } = useFindPokemon();
 
   const onChange = debounce(
     (value: string) => {
       if (value) {
-        const a = findPokemon(value);
-        console.log(JSON.stringify(a));
+        const result = findPokemonById(value.toLowerCase());
+        setSearchResult(result || []);
+      } else {
+        setSearchResult([]);
       }
     },
     500,
     {
-      leading: true,
+      trailing: true,
     }
   );
 
@@ -32,7 +35,10 @@ export default function Home() {
         marginBottom="spacing4"
         onChangeText={onChange}
       />
-      <PokemonList isFetching={isFetching} pokemons={pokemons || []} />
+      <PokemonList
+        isFetching={isFetching && !searchResult.length}
+        pokemons={searchResult.length ? searchResult : pokemons || []}
+      />
     </>
   );
 }

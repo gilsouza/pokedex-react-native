@@ -1,15 +1,14 @@
 import { Stack } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { PokemonList } from '~/components/PokemonList';
 
-import { ScreenContent } from '~/components/ScreenContent';
-
-export default function Home() {
+export default function BackTrack() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Tab Two' }} />
-      <View style={styles.container}>
-        {/* <ScreenContent path="app/(tabs)/pokeballs.tsx" title="Tab Two" /> */}
-      </View>
+      <Stack.Screen options={{ title: 'Meus Pokemons' }} />
+      <>
+        <PokemonList isFetching={false} pokemons={pokemons || []} />
+      </>
     </>
   );
 }

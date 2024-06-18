@@ -14,10 +14,6 @@ interface PokemonCardProps {
 const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
   const theme = useTheme();
 
-  console.log('pokemon.imageUrl', pokemon.imageUrl);
-
-  // const firstTypeName = pokemon.types?.at(0)?.name;
-  // const colorHex = (`${firstTypeName}Dark` as keyof typeof theme.colors) || theme.colors.steelLight;
   const pokemonNumber = toPokemonNumber(pokemon.id);
 
   return (
@@ -42,7 +38,6 @@ const PokemonCard = ({ pokemon, contentFit }: PokemonCardProps) => {
       })}>
       <Box
         alignContent="center"
-        // backgroundColor={colorHex}
         borderRadius="borderRadii12"
         justifyContent="center"
         paddingHorizontal="spacing8"

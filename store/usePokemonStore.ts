@@ -4,11 +4,11 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { capture, release } from './storeService';
 
-import { PokemonListInfo } from '~/model/PokemonInfo';
+import { PokemonInfo } from '~/model/PokemonInfo';
 
 interface PokemonState {
-  captured: PokemonListInfo[];
-  capture: (pokemon: PokemonListInfo) => void;
+  captured: PokemonInfo[];
+  capture: (pokemon: PokemonInfo) => void;
   release: (id: number) => void;
 }
 
@@ -16,7 +16,7 @@ export const usePokemonStore = create<PokemonState>()(
   persist(
     (set) => ({
       captured: [],
-      capture: (pokemon: PokemonListInfo) => set(capture(pokemon)),
+      capture: (pokemon: PokemonInfo) => set(capture(pokemon)),
       release: (id: number) => set(release(id)),
     }),
     {

@@ -1,9 +1,9 @@
 import { PokemonState } from './state';
 
-import { PokemonListInfo } from '~/model/PokemonInfo';
+import { PokemonInfo } from '~/model/PokemonInfo';
 
 export const capture = (
-  pokemon: PokemonListInfo
+  pokemon: PokemonInfo
 ):
   | PokemonState
   | Partial<PokemonState>

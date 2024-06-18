@@ -5,9 +5,9 @@ import { Pressable, StyleSheet } from 'react-native';
 import Toast from 'react-native-root-toast';
 
 import { useCapturePokemon } from '~/hooks/useCapturePokemon';
-import { PokemonListInfo } from '~/model/PokemonInfo';
+import { PokemonInfo } from '~/model/PokemonInfo';
 
-export const CaptureButton = forwardRef<typeof Pressable, { pokemon?: PokemonListInfo }>(
+export const CaptureButton = forwardRef<typeof Pressable, { pokemon?: PokemonInfo }>(
   ({ pokemon }, ref) => {
     const theme = useTheme();
     const { capture, hasCaptured, release } = useCapturePokemon();

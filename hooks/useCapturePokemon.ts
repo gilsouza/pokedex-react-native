@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { PokemonListInfo } from '~/model/PokemonInfo';
+import { PokemonInfo } from '~/model/PokemonInfo';
 import { usePokemonStore } from '~/store/usePokemonStore';
 
 export const useCapturePokemon = () => {
@@ -8,7 +8,9 @@ export const useCapturePokemon = () => {
   const _capture = usePokemonStore((state) => state.capture);
   const _release = usePokemonStore((state) => state.release);
 
-  const capture = useCallback((pokemon: PokemonListInfo) => {
+  console.log(JSON.stringify(captured));
+
+  const capture = useCallback((pokemon: PokemonInfo) => {
     _capture(pokemon);
   }, []);
 

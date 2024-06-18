@@ -1,7 +1,7 @@
-import { PokemonListInfo } from '~/model/PokemonInfo';
+import { PokemonInfo } from '~/model/PokemonInfo';
 
 export interface PokemonState {
-  captured: PokemonListInfo[];
-  capture: (pokemon: PokemonListInfo) => void;
+  captured: PokemonInfo[];
+  capture: (pokemon: PokemonInfo) => void;
   release: (id: number) => void;
 }
